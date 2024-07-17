@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뚱땅</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h3 {
+            margin-top: 50px;
+            color: #333;
+        }
+        .slider-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        .slider:hover {
+            opacity: 1;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        .marks {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            margin-top: 10px;
+        }
+        .mark {
+            position: relative;
+            font-size: 14px;
+            color: #333;
+        }
+        .mark::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+        }
+        .score {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color .3s;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h3><strong><center>오늘 나의 기분 췤~</center></strong></h3>
+    <center>Q. 100점 만점에 몇 점인가요?<br>
+   행복한 기분을 낼 수 있는 방안을 제시해드립니다. </center>
+    <div class="slider-container">
+        <input type="range" min="0" max="100" value="50" step="1" class="slider" id="scoreSlider">
+        <div class="marks">
+            <div class="mark">별로</div>
+            <div class="mark"></div>
+            <div class="mark">짱조아</div>
+        </div>
+        <p class="score">점수: <span id="scoreValue">50</span>점</p>
+        <button class="submit-btn" onclick="showMessage()">제출하기</button>
+        <p class="message" id="message"></p>
+    </div>
+
+    <script>
+        const slider = document.getElementById('scoreSlider');
+        const scoreValue = document.getElementById('scoreValue');
+        const message = document.getElementById('message');
+
+        slider.oninput = function() {
+            scoreValue.textContent = this.value;
+        }
+
+        function showMessage() {
+            const score = slider.value;
+            let msg = "";
+
+            if (score == 0) {
+                msg = "기분전환을 위해 맛있는 걸 먹으러 가세요!";
+            } else if (score > 0 && score <= 20) {
+                msg = "산책을 하며 기분을 전환해보세요.";
+            } else if (score > 20 && score <= 40) {
+                msg = "좋아하는 음악을 들어보세요.";
+            } else if (score > 40 && score <= 60) {
+                msg = "영화를 한 편 보는 건 어떨까요?";
+            } else if (score > 60 && score <= 80) {
+                msg = "친구와 함께 시간을 보내보세요.";
+            } else if (score > 80 && score < 100) {
+                msg = "당신의 하루가 정말 좋군요!";
+            } else if (score == 100) {
+                msg = "최고의 하루를 보내고 있군요!";
+            }
+
+            message.textContent = msg;
+        }
+    </script>
+
+    <p>
+        @hahyunlee
+    </p>
+</body>
+</html>
